@@ -1,0 +1,15 @@
+<!-- templates/stock/produit_confirm_delete.html -->
+{% extends 'stock/base.html' %}
+{% block title %}Supprimer Produit{% endblock %}
+
+{% block content %}
+<div class="card p-4 shadow-sm">
+    <h4 class="text-danger">Confirmation de suppression</h4>
+    <p>Êtes-vous sûr de vouloir supprimer le produit <strong>{{ produit.nom }}</strong> ?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Oui, Supprimer</button>
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+{% endblock %}

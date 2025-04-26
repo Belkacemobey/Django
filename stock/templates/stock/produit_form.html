@@ -1,0 +1,17 @@
+<!-- templates/stock/produit_form.html -->
+{% extends 'stock/base.html' %}
+{% block title %}Ajouter / Modifier Produit{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm p-4">
+    <h4 class="mb-3">{{ form.instance.pk|yesno:"Modifier le produit,Ajouter un nouveau produit" }}</h4>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="mt-3">
+            <button type="submit" class="btn btn-success">Enregistrer</button>
+            <a href="{% url 'dashboard' %}" class="btn btn-secondary">Annuler</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

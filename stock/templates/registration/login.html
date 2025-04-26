@@ -1,34 +1,142 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login | Inventory Management</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="bg-light d-flex align-items-center" style="height: 100vh;">
+{% extends "stock/base.html" %}
+
+{% block title %}Login | Inventory Management{% endblock %}
+
+{% block content %}
+<style>
+    .login-container {
+        background-image: url('https://img.freepik.com/free-vector/warehouse-shelves-with-cardboard-wooden-boxes-vector-cartoon-illustration-factory-delivery-company-supermarket-storehouse-interior-packages-with-goods-large-room-with-lamps-ceiling_107791-23124.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .login-card {
+        background-color: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(5px);
+        border-radius: 10px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+    
+    .login-card .card-body {
+        padding: 2.5rem;
+    }
+    
+    .form-control:focus {
+        border-color: #4e73df;
+        box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+    }
+    
+    .btn-primary {
+        background-color: #4e73df;
+        border-color: #4e73df;
+    }
+    
+    .btn-primary:hover {
+        background-color: #3a5bc7;
+        border-color: #3a5bc7;
+    }
+    
+    .text-muted {
+        color: #6c757d!important;
+    }
+    
+    .text-muted:hover {
+        color: #4e73df!important;
+        text-decoration: none;
+    }
+</style>
+
+<div class="login-container">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-4">
-                <div class="card shadow p-4">
-                    <h3 class="text-center mb-4">Inventory Login</h3>
-                    <form method="post">
-                        {% csrf_token %}
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" name="username" class="form-control" required autofocus>
+            <div class="col-md-5 col-lg-4">
+                <div class="card login-card shadow-lg">
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            <i class="fas fa-warehouse fa-3x mb-3" style="color: #4e73df;"></i>
+                            <h3 class="h4">Inventory Login</h3>
+                            <p class="text-muted">Access your warehouse management system</p>
                         </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control" required>
+                        
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <input type="text" name="username" id="username" class="form-control" required autofocus>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                    <input type="password" name="password" id="password" class="form-control" required>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-block mt-3">
+                                    <i class="fas fa-sign-in-alt me-2"></i> Login
+                                </button>
+                            </div>
+                        </form>
+
+                        {% if form.errors %}
+                            <div class="alert alert-danger mt-3 text-center" role="alert">
+                                <i class="fas fa-exclamation-circle me-2"></i> Invalid credentials or empty fields
+                            </div>
+                        {% endif %}
+
+                        <div class="text-center mt-3">
+                            <a href="#" class="text-muted" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">
+                                <i class="fas fa-key me-1"></i> Forgot Password?
+                            </a>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100">Login</button>
-                    </form>
-                    {% if form.errors %}
-                        <div class="alert alert-danger mt-3">Invalid credentials</div>
-                    {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</body>
-</html>
+</div>
+
+<!-- Modal Forgot Password -->
+<div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="forgotPasswordModalLabel">
+                    <i class="fas fa-key me-2"></i> Reset Your Password
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="resetEmail" class="form-label">Email Address</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            <input type="email" class="form-control" id="resetEmail" placeholder="Enter your email">
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane me-2"></i> Send Reset Link
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Font Awesome for icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+{% endblock %}

@@ -3,18 +3,24 @@
 {% block title %}Login | Inventory Management{% endblock %}
 
 {% block content %}
-<style>
-    .login-container {
+<<style>
+    body {
         background-image: url('https://img.freepik.com/free-vector/warehouse-shelves-with-cardboard-wooden-boxes-vector-cartoon-illustration-factory-delivery-company-supermarket-storehouse-interior-packages-with-goods-large-room-with-lamps-ceiling_107791-23124.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         min-height: 100vh;
+    }
+
+    .login-container {
+        min-height: 100vh;
         display: flex;
-        align-items: center;
+        align-items: flex-start; /* au lieu de center */
         justify-content: center;
+        padding-top: 80px; /* pousse vers le bas depuis le haut */
     }
     
+
     .login-card {
         background-color: rgba(255, 255, 255, 0.92);
         backdrop-filter: blur(5px);
@@ -22,35 +28,10 @@
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         border: 1px solid rgba(255, 255, 255, 0.18);
     }
-    
-    .login-card .card-body {
-        padding: 2.5rem;
-    }
-    
-    .form-control:focus {
-        border-color: #4e73df;
-        box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
-    }
-    
-    .btn-primary {
-        background-color: #4e73df;
-        border-color: #4e73df;
-    }
-    
-    .btn-primary:hover {
-        background-color: #3a5bc7;
-        border-color: #3a5bc7;
-    }
-    
-    .text-muted {
-        color: #6c757d!important;
-    }
-    
-    .text-muted:hover {
-        color: #4e73df!important;
-        text-decoration: none;
-    }
+
+    /* Les autres styles restent pareils... */
 </style>
+
 
 <div class="login-container">
     <div class="container">
